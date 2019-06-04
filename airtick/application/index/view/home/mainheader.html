@@ -1,0 +1,99 @@
+<html>
+     <head>
+            <link rel="stylesheet" type="text/css"  href="__CSS__/head.css"/>
+            <script type="text/javascript" src="__JS__/jquery-1.10.2.min.js"></script>
+     </head>
+     <body>
+          <div>
+                         <header class="vui-header">
+                              <div class="vui-header-logo">
+                                   <a href="http://www.tp5.com/airtick/public/index/book/flights"><h1 class="log">AirLine</h1></a>
+                              </div>
+                              <div class="vui-sign">
+                                   <a >sign in</a>
+                              </div>
+                              <div class="vui-firstname" style="display:none;">
+                                   <a>sign in</a>
+                              </div>
+                    
+                         </header>
+               
+          </div>
+     </body>
+</html>
+<script>
+     $(function()
+     {
+          tongcheng()
+          function get()
+               {
+               var xmlHttpRequest ;
+                    if(document.all){
+                         xmlHttpRequest=new ActiveXObject("Microsoft.XMLHTTP");
+                    }else{
+                         xmlHttpRequest = new XMLHttpRequest();
+                    }
+                    return xmlHttpRequest;
+               }
+          function tongcheng(){
+               (function xiecheng_post(){
+                    myxml_head = get();
+                    var url ="http://www.tp5.com/airtick/public/index/home/checkUser.html";
+                    myxml_head.open("get",url,true);
+                    myxml_head.onreadystatechange=tttc;
+                    myxml_head.send(null);
+               })();
+                    function tttc(){
+                         if(myxml_head.readyState==4)
+                              {
+                                   var ex =myxml_head.responseText;
+                                   if(ex!=1)
+                                   {
+                                        btnclk(ex)
+                                   }
+                                   else
+                                   {
+                                        $(".vui-sign>a").attr("href","http://www.tp5.com/airtick/public/index/login/login")
+                                   }
+                                                                    
+                              }
+                    }
+          }
+       
+
+          function btnclk(e)
+          {
+               var sign_out=$(".vui-sign>a").html("sign out");
+                                         $(".vui-firstname").css({
+                                             display:"block",
+                                                       })
+                                        $(".vui-firstname>a").html(e);
+                                        $(".vui-firstname>a").attr("href","http://www.tp5.com/airtick/public/index/register/userpage.html")
+                                        sign_out.click(function(){
+                                             (function xiecheng_post(){
+                                                  myxml_out = get();
+                                                  var url ="http://www.tp5.com/airtick/public/index/home/signOut.html";
+                                                  myxml_out.open("get",url,true);
+                                                  myxml_out.onreadystatechange=out;
+                                                  myxml_out.send(null);
+                                             })();
+                                             function out(){
+                                                  if(myxml_out.readyState==4)
+                                                    {
+                                                      
+                                                       $(".vui-firstname").css({
+                                                            display:"none",
+                                                       })
+                                                       $(".vui-sign>a").html("sign in");
+                                                       $(".vui-sign>a").attr("href","http://www.tp5.com/airtick/public/index/login/login")
+                                                    }
+                                             }
+
+                                        })
+
+          }
+
+     })
+     
+
+</script>
